@@ -1,21 +1,19 @@
-import * as React from 'react';
-import { Text, View, Button, TouchableWithoutFeedback } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, TouchableWithoutFeedback, Vibration } from 'react-native';
 import styles from './styles';
 
-export default class App extends React.Component {
+export default class App extends Component {
   constructor() {
     super();
 
     this.state = {
       count: 0,
       time: 0,
-      timer: 10,
-      timerHide: true,
     };
   }
 
   handlePress = () => {
-    const { time, timer } = this.state;
+    const { time } = this.state;
     setTimeout(
       () =>
         this.setState((prevState) => {
@@ -23,17 +21,11 @@ export default class App extends React.Component {
             ...prevState,
             count: prevState.count + 1,
           };
-        }),
+        },
+        Vibration.vibrate()
+        ),
       time
     );
-    if (time === 10000) {
-      this.setState((prevState) => {
-        return {
-          ...prevState,
-          timerHide: false,
-        };
-      });
-    }
   };
 
   setTime = (time) => {
@@ -55,12 +47,11 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { count, time, timer, timerHide } = this.state;
+    const { count, time } = this.state;
     return (
       <View style={styles.container}>
         <Text style={styles.tempo}>
-          {' '}
-          {time === 0 ? 'Sem temporizador' : 'Dez Segundos'}{' '}
+          {time === 0 ? 'Sem temporizador' : 'Dez Segundos'}
         </Text>
         <View style={styles.buttonsContainer}>
           {time !== 0 ? <TouchableWithoutFeedback onPress={() => this.setTime(0)}>
@@ -74,7 +65,7 @@ export default class App extends React.Component {
           <Text style={styles.buttonCount}>{count}</Text>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => this.zerarContador()}>
-          <Text style={styles.reset}>Zerar</Text>
+          <Text style={styles.reset}>Resetar</Text>
         </TouchableWithoutFeedback>
       </View>
     );
