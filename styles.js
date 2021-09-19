@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+    width:"100%",
     backgroundColor:"#fff"
   },
   buttonsContainer: {
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     width:"80%"
   },
   buttonCount: {
-    padding: 90,
+    padding: 140,
     borderRadius: 30,
     color:"white",
     fontSize:90,
@@ -32,17 +33,17 @@ const styles = StyleSheet.create({
     padding: 20,
     fontWeight:"bold",
     borderRadius:50,
-    width: "70%",
+    width: "100%",
     textAlign: "center"
   },
-  dezSegundos: {
+  tenSeconds: {
     backgroundColor: "#243447",
     color:"white",
     fontSize:25,
     margin: 10,
     padding:20,
     fontWeight:"bold",
-    width:"70%",
+    width:"100%",
     borderRadius:50,
     textAlign: "center"
   },
@@ -54,14 +55,18 @@ const styles = StyleSheet.create({
     marginTop:40,
     fontWeight:"bold",
     borderRadius:30,
-    width:"55%",
+    width:"80%",
     textAlign:"center"
   },
-  tempo: {
+  time: {
     fontWeight: "bold",
     color: "#000",
     fontSize: 30,
     marginBottom: 30,
+  },
+  goal: {
+    margin: 30,
+    fontSize: 18,
   }
 });
 

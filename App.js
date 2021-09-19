@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableWithoutFeedback, Vibration } from 'react-native';
+import { Text, View, TouchableWithoutFeedback, Vibration, TextInput } from 'react-native';
 import styles from './styles';
 
 export default class App extends Component {
@@ -9,11 +9,15 @@ export default class App extends Component {
     this.state = {
       count: 0,
       time: 0,
+      goal: 3,
+      showGoal: false,
     };
   }
 
   handlePress = () => {
-    const { time } = this.state;
+    const { time, count, goal } = this.state;
+    time === 10000 && Vibration.vibrate(100);
+    count === goal - 1 && Vibration.vibrate(1000);
     setTimeout(
       () =>
         this.setState((prevState) => {
@@ -29,28 +33,46 @@ export default class App extends Component {
   };
 
   setTime = (time) => {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        time,
-      };
+    Vibration.vibrate(100)
+    this.setState({
+      time,
     });
   };
 
-  zerarContador = () => {
+  resetCounter = () => {
+    Vibration.vibrate(100)
+    this.setState({
+      count: 0,
+    });
+  };
+
+  showGoal = () => {
     this.setState((prevState) => {
       return {
         ...prevState,
-        count: 0,
-      };
-    });
-  };
+        showGoal: !prevState.showGoal,
+      }
+    })
+  }
+
+  setGoal = (value) => {
+    this.setState({
+      goal: Number(value)
+    })
+    this.showGoal();
+  }
+
+  handleChange = (value) => {
+    this.setState({
+      goalTyped: value
+    })
+  }
 
   render() {
-    const { count, time } = this.state;
+    const { count, time, showGoal, goalTyped } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.tempo}>
+        <Text style={styles.time}>
           {time === 0 ? 'Sem temporizador' : 'Dez Segundos'}
         </Text>
         <View style={styles.buttonsContainer}>
@@ -58,15 +80,31 @@ export default class App extends Component {
             <Text style={styles.normal}>Normal</Text>
           </TouchableWithoutFeedback> :
           <TouchableWithoutFeedback onPress={() => this.setTime(10000)}>
-            <Text style={styles.dezSegundos}>10 Segundos</Text>
+            <Text style={styles.tenSeconds}>10 Segundos</Text>
           </TouchableWithoutFeedback>}
         </View>
         <TouchableWithoutFeedback onPress={() => this.handlePress()}>
           <Text style={styles.buttonCount}>{count}</Text>
         </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => this.zerarContador()}>
+        <TouchableWithoutFeedback onPress={() => this.resetCounter()}>
           <Text style={styles.reset}>Resetar</Text>
         </TouchableWithoutFeedback>
+        {!showGoal ? <TouchableWithoutFeedback>
+          <Text style={styles.goal} onPress={() => this.showGoal()}>Definir Meta</Text>
+        </TouchableWithoutFeedback> : 
+        <View>
+          <TextInput
+            placeholder="Defina a meta"
+            value={ goalTyped }
+            onChangeText={(value) => this.handleChange(value)}
+            keyboardType="numeric"
+          />
+          <TouchableWithoutFeedback>
+            <Text onPress={() => this.setGoal(goalTyped)}>Ok</Text>
+          </TouchableWithoutFeedback>
+        </View>
+        }
+
       </View>
     );
   }
