@@ -12,16 +12,24 @@ export default function App() {
   const [count, setCount] = useState(0);
   const [time, setTime] = useState(0);
   const [goal, setGoal] = useState(60);
-  const [goalTyped, setGoalTyped] = useState(1);
+  const [goalTyped, setGoalTyped] = useState(60);
   const [showGoal, setShowGoal] = useState(false);
 
-  const handlePress = () => {
-    time === 10000 && Vibration.vibrate(100);
-    count === goal - 1 && Vibration.vibrate(1000);
+  const incrementCount = () => {
     setTimeout(() => {
       setCount(count + 1);
       Vibration.vibrate();
     }, time);
+  }
+
+  const vibrateOnGoal = () => count === goal - 1 && Vibration.vibrate(1000);
+
+  const tenSecondsVibrate = () => time === 10000 && Vibration.vibrate(100);
+
+  const handlePress = () => {
+    tenSecondsVibrate();
+    vibrateOnGoal();
+    incrementCount();
   };
 
   const handleSetTime = (value) => {
