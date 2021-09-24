@@ -10,13 +10,6 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  buttonsContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 30,
-    width: "80%",
-  },
   buttonCount: {
     backgroundColor: "red",
     borderRadius: 30,
@@ -24,28 +17,8 @@ const styles = StyleSheet.create({
     fontSize: 90,
     fontWeight: "bold",
     padding: 140,
-  },
-  normal: {
-    backgroundColor: "#243447",
-    borderRadius: 50,
-    color: "#FFF",
-    fontSize: 25,
-    fontWeight: "bold",
-    margin: 10,
-    padding: 20,
-    textAlign: "center",
-    width: "100%",
-  },
-  tenSeconds: {
-    backgroundColor: "#243447",
-    borderRadius: 50,
-    color: "#FFF",
-    fontSize: 25,
-    fontWeight: "bold",
-    margin: 10,
-    padding: 20,
-    textAlign: "center",
-    width: "100%",
+    paddingTop: 160,
+    paddingBottom: 160
   },
   reset: {
     backgroundColor: "#f2ca52",
@@ -58,30 +31,34 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: "80%",
   },
-  time: {
-    color: "#000",
-    fontSize: 30,
-    fontWeight: "bold",
+  settedSettings: {
     margin: 30,
   },
-  goal: {
+  settedSettingsText: {
+    color: "#000",
+    fontSize: 25,
+    fontWeight: "bold",
+    marginBottom: 15,
+    textAlign: 'center'
+  },
+  settings: {
     fontSize: 15,
-    marginTop: 30,
+    marginTop: 50,
     opacity: 0.5,
   },
-  setGoal: {
+  setSettings: {
+    alignItems: 'center',
     display: "flex",
-    flexDirection: "row",
-    marginTop: 30,
+    flexDirection: "column",
+    height: '100%',
+    justifyContent: 'center',
+    marginTop: 30
   },
-  setGoalInput: {
+  setSettingsInput: {
     fontSize: 18,
-    marginRight: 25,
+    marginBottom: 25,
   },
-  setGoalButton: {
-    marginLeft: 25,
-  },
-  setGoalButtonText: {
+  setSettingsButtonText: {
     backgroundColor: "#33A622",
     borderRadius: 10,
     color: "#FFF",
@@ -91,6 +68,10 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
   },
+  modal: {
+    height: '50%',
+    width: '50%'
+  }
 });
 
 export default styles;
